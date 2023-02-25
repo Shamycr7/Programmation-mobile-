@@ -16,7 +16,7 @@ public class EXO_2 extends AppCompatActivity {
     private SensorManager sensorManager;
     private List<Sensor> listeCapteur;
     private TextView listeCapteurString;
-    private  Sensor mSensor;
+    private Sensor mSensor;
 
 
     @Override
@@ -24,19 +24,26 @@ public class EXO_2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exo2);
 
-      //  sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        //  sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         listeCapteurString = findViewById(R.id.capteurString);
         listeCapteur = sensorManager.getSensorList(Sensor.TYPE_ALL);
 
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null){
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null) {
 
-            listeCapteurString.setText(listeCapteurString.getText() + "SUCCESS !");
+            listeCapteurString.setText(listeCapteurString.getText() + "SUCCESS !\n");
+        } else {
+            listeCapteurString.setText(listeCapteurString.getText() + " EN raison de de l'indisponibilté du capteur TYPE_HEART_RATE L'application SANTÉ ne pas fontionner !\n");
         }
-        else listeCapteurString.setText(listeCapteurString.getText() + " L'application SANTÉ ne pas fontionner !");
+        for (Sensor sensor : listeCapteur) {
 
+            if (sensorManager.getDefaultSensor(Sensor.TYPE_ALL) != null) {
+
+                listeCapteurString.setText(listeCapteurString.getText() +" NAME : "  + sensor.getName()+"SUCCESS !\n");
+
+            }
+        }
 
     }
-
-    }
+}
